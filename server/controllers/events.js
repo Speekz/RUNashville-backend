@@ -20,6 +20,15 @@ module.exports = {
       }
     });
   },
+  getAllReportedEvents(req, res) {
+    models.events.getAllReportedEvents((result) => {
+      if (result.length !== 0) {
+        res.status(200).send(result);
+      } else {
+        res.status(404).send('No Events Found');
+      }
+    });
+  },
   getHiddenEvents(req, res) {
     models.events.getHiddenEvents((result) => {
       if (result.length !== 0) {
