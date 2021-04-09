@@ -221,5 +221,5 @@ INSERT INTO events (fk_event_type_id, event_title, description_events, official,
 */
 
 /*  Execute this file from the command line by typing:
- *    mysql -u root < db/schema.sql
+ *    mysql -u root -p < db/schema.sql
  *  to create the database and the tables.*/
