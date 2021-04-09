@@ -3,3 +3,6 @@
 
 ## package_lock
 package-lock.json
+
+##secrets
+/secrets
