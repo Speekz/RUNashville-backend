@@ -2,7 +2,7 @@ const db = require('../../db');
 
 module.exports = {
   getUserPost(id, callback) {
-    const queryString = 'SELECT u.id, u.name_user, u.last_name, p.id, p.image_url, p.message_post, p.show_post, p.location_post, p.created_at FROM post AS p LEFT JOIN user AS u ON p.fk_user_id = u.id WHERE p.fk_user_id = ? AND p.reported = false';
+    const queryString = 'SELECT u.id, u.name_user, u.last_name, u.image_url, p.id, p.image_url, p.message_post, p.show_post, p.location_post, p.created_at FROM post AS p LEFT JOIN user AS u ON p.fk_user_id = u.id WHERE p.fk_user_id = ? AND p.reported = false';
     db.connection.query(queryString, [id], (err, result) => {
       if (err) {
         console.log(err);
@@ -38,7 +38,7 @@ module.exports = {
     });
   },
   getPostComments(id, callback) {
-    const queryString = 'SELECT p.id, c.id, u.name_user, u.last_name, c.message_comments, c.created_at, c.updated_at FROM comments AS c LEFT JOIN post AS p ON c.fk_post_id = p.id LEFT JOIN user AS u ON c.fk_user_id = u.id WHERE c.fk_post_id = ?';
+    const queryString = 'SELECT p.id, c.id, u.name_user, u.last_name, u.image_url, c.message_comments, c.created_at, c.updated_at FROM comments AS c LEFT JOIN post AS p ON c.fk_post_id = p.id LEFT JOIN user AS u ON c.fk_user_id = u.id WHERE c.fk_post_id = ?';
     db.connection.query(queryString, [id], (err, result) => {
       if (err) {
         console.log(err);
