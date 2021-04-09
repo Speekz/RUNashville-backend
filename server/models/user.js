@@ -2,7 +2,7 @@ const db = require('../../db');
 
 module.exports = {
   getUserDetails(id, callback) {
-    const queryString = 'SELECT u.name_user, u.last_name, u.address_user, u.email, u.image_url, u.banner_url, u.banned, u.bio_description, u.created_at, ut.name_user_type FROM user AS u LEFT JOIN user_type AS ut ON u.fk_user_type_id = ut.id WHERE u.id = ?';
+    const queryString = 'SELECT u.id, u.name_user, u.last_name, u.address_user, u.email, u.image_url, u.banner_url, u.banned, u.bio_description, u.created_at, ut.name_user_type FROM user AS u LEFT JOIN user_type AS ut ON u.fk_user_type_id = ut.id WHERE u.id = ?';
     db.connection.query(queryString, [id], (err, result) => {
       if (err) {
         console.log(err);
@@ -20,7 +20,7 @@ module.exports = {
     });
   },
   getAllUsers(callback) {
-    const queryString = 'SELECT name_user, last_name, address_user, email, banned, created_at FROM user';
+    const queryString = 'SELECT u.id, name_user, last_name, address_user, email, banned, created_at FROM user';
     db.connection.query(queryString, (err, result) => {
       if (err) {
         console.log(err);
@@ -38,7 +38,7 @@ module.exports = {
     });
   },
   getBannedUsers(callback) {
-    const queryString = 'SELECT u.name_user, u.last_name, u.address_user, u.email, u.image_url, u.banned, u.created_at, ut.name_user_type FROM user AS u LEFT JOIN user_type AS ut ON u.fk_user_type_id = ut.id WHERE u.banned = true';
+    const queryString = 'SELECT u.id, u.name_user, u.last_name, u.address_user, u.email, u.image_url, u.banned, u.created_at, ut.name_user_type FROM user AS u LEFT JOIN user_type AS ut ON u.fk_user_type_id = ut.id WHERE u.banned = true';
     db.connection.query(queryString, (err, result) => {
       if (err) {
         console.log(err);
