@@ -2,7 +2,7 @@ const db = require('../../db');
 
 module.exports = {
   getUserDetails(id, callback) {
-    const queryString = 'SELECT u.id, u.name_user, u.last_name, u.address_user, u.email, u.image_url, u.banner_url, u.banned, u.bio_description, u.created_at, ut.name_user_type FROM user AS u LEFT JOIN user_type AS ut ON u.fk_user_type_id = ut.id WHERE u.id = ?';
+    const queryString = 'SELECT u.id, u.name_user, u.last_name, u.address_user, u.email, u.image_url, u.banner_url, u.banned, u.bio_description, u.created_at, ut.name_user_type FROM user AS u LEFT JOIN user_type AS ut ON ut.fk_user_type_id = u.id WHERE u.id = ?';
     db.connection.query(queryString, [id], (err, result) => {
       if (err) {
         console.log(err);
