@@ -120,7 +120,7 @@ CREATE TABLE events (
   event_title VARCHAR(40),
   description_events TEXT,
   reported BOOLEAN DEFAULT false,
-  hide_events BOOLEAN DEFAULT false,
+  hide_event BOOLEAN DEFAULT false,
   fk_event_type_id INT,
   fk_difficulty_level_id INT,
   fk_leader_user_id INT,
@@ -212,8 +212,9 @@ INSERT INTO events (fk_event_type_id, fk_difficulty_level_id, fk_leader_user_id,
 INSERT INTO events (fk_event_type_id, fk_difficulty_level_id, fk_leader_user_id, description_events, official, start_time, end_time, start_location, end_location, running_distance, attendees, promoted, created_at, updated_at,reported, hide_event) VALUES (2, 1, 2, 'Meet at building entrance for an afternoon jog', true, '2021-04-08T17:00:00', '2021-04-05T19:00:00', 'Shelby Park Community Center', 'Shelby Park Community Center', 3.1, 8, true, '2021-04-05 00:00:00', '2021-04-05 00:00:00', true, false);
 -- Daily Runs (Unofficial)
 -- Other
-INSERT INTO events (fk_event_type_id, event_title, description_events, official, start_time, end_time, start_location, end_location, running_distance, attendees, promoted, created_at, updated_at,reported, hide_event) VALUES (3, 'Join Our Weekly Newsletter', 'Learn how you can help make our community a better place!', true, '2021-04-08T06:00:00', '2021-04-05T07:30:00', 'Centennial Park, West End Ave Entrance', 'Centennial Park, West End Ave Entrance', 3.1, 12, true, '2021-04-05 00:00:00', '2021-04-05 00:00:00');
-INSERT INTO events (fk_event_type_id, event_title, description_events, official, start_time, end_time, start_location, end_location, running_distance, attendees, promoted, created_at, updated_at,reported, hide_event) VALUES (3, 'Volunteer With Habitat for Humanity', 'Learn how you can help make our community a better place!', true, '2021-04-08T08:30:00', '2021-04-05T10:00:00', 'Fannie Mae Dees Park', 'Fannie Mae Dees Park', 3.1, 12, true, '2021-04-05 00:00:00', '2021-04-05 00:00:00');
+INSERT INTO events (fk_event_type_id, event_title, description_events, official, start_time, end_time, start_location, end_location, running_distance, attendees, promoted, created_at, updated_at,reported, hide_event) VALUES (3, 'Join Our Weekly Newsletter', 'Learn how you can help make our community a better place!', true, '2021-04-08T06:00:00', '2021-04-05T07:30:00', 'Centennial Park, West End Ave Entrance', 'Centennial Park, West End Ave Entrance', 3.1, 12, true, '2021-04-05 00:00:00', '2021-04-05 00:00:00',true, false);
+
+INSERT INTO events (fk_event_type_id, event_title, description_events, official, start_time, end_time, start_location, end_location, running_distance, attendees, promoted, created_at, updated_at,reported, hide_event) VALUES (3, 'Volunteer With Habitat for Humanity', 'Learn how you can help make our community a better place!', true, '2021-04-08T08:30:00', '2021-04-05T10:00:00', 'Fannie Mae Dees Park', 'Fannie Mae Dees Park', 3.1, 12, true, '2021-04-05 00:00:00', '2021-04-05 00:00:00', false, false);
 
 /* MOCK EMAIL: Jodi@21Jump.com
   MOCK PASSWORD: Jodi
