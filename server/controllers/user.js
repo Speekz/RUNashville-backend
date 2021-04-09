@@ -6,7 +6,7 @@ module.exports = {
       if (result.length !== 0) {
         res.status(200).json(result);
       } else {
-        res.status(404).send('User Not Found');
+        res.status(204).send('User Not Found');
       }
     });
   },
@@ -15,7 +15,7 @@ module.exports = {
       if (result.length !== 0) {
         res.status(200).json(result);
       } else {
-        res.status(404).send('User Not Found');
+        res.status(204).send('User Not Found');
       }
     });
   },
@@ -24,7 +24,7 @@ module.exports = {
       if (result.length !== 0) {
         res.status(200).json(result);
       } else {
-        res.status(404).send('User Not Found');
+        res.status(204).send('User Not Found');
       }
     });
   },
@@ -33,7 +33,7 @@ module.exports = {
       if (result.length !== 0) {
         res.status(200).json(result);
       } else {
-        res.status(404).send('User Not Found');
+        res.status(204).send('User Not Found');
       }
     });
   },
@@ -42,7 +42,7 @@ module.exports = {
       if (result.length !== 0) {
         res.status(200).json(result);
       } else {
-        res.status(404).send('User Not Found');
+        res.status(204).send('User Not Found');
       }
     });
   },
@@ -59,54 +59,54 @@ module.exports = {
     if (update === 'banned') {
       models.user.putUpdateUserBanned(data, (err, result) => {
         if (err) {
-          res.status(404).send('User Not Found');
+          res.status(204).send('User Not Found');
         } else {
-          res.status(204).send(result);
+          res.status(201).send(result);
         }
       });
     }
     if (update === 'name') {
       models.user.putUpdateUserName(data, (err, result) => {
         if (err) {
-          res.status(404).send('User Not Found');
+          res.status(204).send('User Not Found');
         } else {
-          res.status(204).send(result);
+          res.status(201).send(result);
         }
       });
     }
     if (update === 'profile_picture') {
       models.user.putUpdateUserProfilePicture(data, (err, result) => {
         if (err) {
-          res.status(404).send('User Not Found');
+          res.status(204).send('User Not Found');
         } else {
-          res.status(204).send(result);
+          res.status(201).send(result);
         }
       });
     }
     if (update === 'profile_banner') {
       models.user.putUpdateUserBannerPicture(data, (err, result) => {
         if (err) {
-          res.status(404).send('User Not Found');
+          res.status(204).send('User Not Found');
         } else {
-          res.status(204).send(result);
+          res.status(201).send(result);
         }
       });
     }
     if (update === 'last_name') {
       models.user.putUpdateUserLastName(data, (err, result) => {
         if (err) {
-          res.status(404).send('User Not Found');
+          res.status(204).send('User Not Found');
         } else {
-          res.status(204).send(result);
+          res.status(201).send(result);
         }
       });
     }
     if (update === 'address_user') {
       models.user.putUpdateUserAddress(data, (err, result) => {
         if (err) {
-          res.status(404).send('User Not Found');
+          res.status(204).send('User Not Found');
         } else {
-          res.status(204).send(result);
+          res.status(201).send(result);
         }
       });
     }
@@ -124,9 +124,9 @@ module.exports = {
       models.user.putUpdateUserBanned(data, (err) => {
         if (count === i) {
           if (err) {
-            res.status(404).send('User Not Found');
+            res.status(204).send('User Not Found');
           } else {
-            res.status(204).send('Updated Ban Status');
+            res.status(201).send('Updated Ban Status');
           }
         } else {
           i += 1;
