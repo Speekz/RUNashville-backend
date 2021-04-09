@@ -20,7 +20,7 @@ module.exports = {
     });
   },
   getAllUsers(callback) {
-    const queryString = 'SELECT u.id, name_user, last_name, address_user, email, banned, created_at FROM user';
+    const queryString = 'SELECT id, name_user, last_name, address_user, email, banned, created_at FROM user';
     db.connection.query(queryString, (err, result) => {
       if (err) {
         console.log(err);
