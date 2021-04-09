@@ -2,7 +2,7 @@ const db = require('../../db');
 
 module.exports = {
   getUserPost(id, callback) {
-    const queryString = 'SELECT u.id, u.name_user, u.last_name, u.image_url, p.id, p.image_url, p.message_post, p.show_post, p.location_post, p.created_at FROM post AS p LEFT JOIN user AS u ON p.fk_user_id = u.id WHERE p.fk_user_id = ? AND p.hide_post = false';
+    const queryString = 'SELECT u.id, u.name_user, u.last_name, u.image_url, p.id, p.image_url, p.message_post, p.hide_post, p.location_post, p.created_at FROM post AS p LEFT JOIN user AS u ON p.fk_user_id = u.id WHERE p.fk_user_id = ? AND p.hide_post = false';
     db.connection.query(queryString, [id], (err, result) => {
       if (err) {
         console.log(err);
@@ -11,7 +11,7 @@ module.exports = {
     });
   },
   getAllReportedPosts(callback) {
-    const queryString = 'SELECT u.id, u.name_user, u.last_name, p.id, p.image_url, p.message_post, p.show_post, p.location_post, p.created_at FROM post AS p LEFT JOIN user AS u ON p.fk_user_id = u.id WHERE p.reported = true && p.hide_post = false';
+    const queryString = 'SELECT u.id, u.name_user, u.last_name, p.id, p.image_url, p.message_post, p.hide_post, p.location_post, p.created_at FROM post AS p LEFT JOIN user AS u ON p.fk_user_id = u.id WHERE p.reported = true';
     db.connection.query(queryString, (err, result) => {
       if (err) {
         console.log(err);
@@ -20,7 +20,7 @@ module.exports = {
     });
   },
   getUserReportedPost(id, callback) {
-    const queryString = 'SELECT u.id, p.id, u.name_user, u.last_name, p.image_url, p.message_post, p.show_post, p.location_post, p.created_at FROM post AS p LEFT JOIN user AS u ON p.fk_user_id = u.id WHERE p.fk_user_id = ? AND p.reported = true';
+    const queryString = 'SELECT u.id, p.id, u.name_user, u.last_name, p.image_url, p.message_post, p.hide_post, p.location_post, p.created_at FROM post AS p LEFT JOIN user AS u ON p.fk_user_id = u.id WHERE p.fk_user_id = ? AND p.reported = true';
     db.connection.query(queryString, [id], (err, result) => {
       if (err) {
         console.log(err);
