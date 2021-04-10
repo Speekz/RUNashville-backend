@@ -67,22 +67,22 @@ module.exports = {
   postUserPost(req, res) {
     const { id, image_url, message_post, location_post } = req.body;
     const data = [ id, image_url, message_post, location_post ];
-    models.post.postUserPost(data, (error)=>{
+    models.post.postUserPost(data, (error, result ) => {
       if(error) {
         res.status(204).send('Error Writing Post');
       } else {
-        res.status(200).send('Post Success')
+        res.status(200).send(result)
       }
     });
   },
   postUserComment(req, res) {
     const { id, postId, comment } = req.body;
     const data = [ id, postId, comment ];
-    models.post.postUserComment(data, (error) => {
+    models.post.postUserComment(data, (error, result) => {
       if (error) {
         res.status(204).send('Error Writing Comment');
       } else {
-        res.status(200).send('Post Success');
+        res.status(200).send(result);
       }
     });
   },
@@ -99,11 +99,11 @@ module.exports = {
   postUserPostLikes(req, res) {
     const { postId, userId, reactionId } = req.body;
     const data = [ postId, userId, reactionId ]
-    models.post.postUserPostLikes(data, (err)=>{
+    models.post.postUserPostLikes(data, (err, result)=>{
       if(err){
         res.status(204).send('Error liking Post');
       } else {
-        res.status(200).send('Post Reported');
+        res.status(200).send(result);
       }
     });
   },
