@@ -38,7 +38,7 @@ module.exports = {
     });
   },
   getPostComments(id, callback) {
-    const queryString = 'SELECT p.id, c.id, u.name_user, u.last_name, u.image_url, c.message_comments, c.created_at, c.updated_at FROM comments AS c LEFT JOIN post AS p ON c.fk_post_id = p.id LEFT JOIN user AS u ON c.fk_user_id = u.id WHERE c.fk_post_id = ?';
+    const queryString = 'SELECT p.id, c.id, u.id, u.name_user, u.last_name, u.image_url, c.message_comments, c.created_at, c.updated_at FROM comments AS c LEFT JOIN post AS p ON c.fk_post_id = p.id LEFT JOIN user AS u ON c.fk_user_id = u.id WHERE c.fk_post_id = ?';
     db.connection.query(queryString, [id], (err, result) => {
       if (err) {
         console.log(err);
