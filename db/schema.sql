@@ -63,7 +63,7 @@ CREATE TABLE stats (
   pace INT,
   heart_rate INT,
   steps INT,
-  calories_burned DECIMAL (3,2),
+  calories_burned INT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   FOREIGN KEY (fk_post_id) REFERENCES post(id)
