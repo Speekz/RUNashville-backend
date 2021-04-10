@@ -64,25 +64,23 @@ module.exports = {
       callback(result);
     });
   },
-  postUserPost(data, callback) {//Phil
+  postUserPost(data, callback) {
     const queryString = 'INSERT INTO post (fk_user_id, image_url, message_post, location_post) VALUES (?, ?, ?, ?)';
-    db.connection.query(queryString, data, (err) => {
+    db.connection.query(queryString, data, (err, result) => {
       if(err) {
-        console.log(err);
-        callback(err);
+        callback(err, null);
       } else {
-        callback(null);
+        callback(null, result);
       }
     });
   },
-  postUserComment(data, callback) {//Phil
+  postUserComment(data, callback) {
     const queryString = 'INSERT INTO comments (fk_post_id, fk_user_id, message_comments) VALUES (?, ?, ?)'
-    db.connection.query(queryString, data, (err) => {
+    db.connection.query(queryString, data, (err,result) => {
       if (err) {
-        console.log(err);
-        callback(err);
+        callback(null, err);
       } else {
-        callback(null);
+        callback(null, result);
       }
     });
   },
@@ -99,12 +97,11 @@ module.exports = {
   },
   postUserPostLikes(data, callback) {
     const queryString = 'INSERT INTO reactions_on_post (fk_post_id, fk_user_id, fk_reaction_id) VALUES (?, ?, ?)';
-    db.connection.query(queryString, data, (err) => {
+    db.connection.query(queryString, data, (err, result) => {
       if (err) {
-        console.log(err);
-        callback(err);
+        callback(err, null);
       } else {
-        callback(null);
+        callback(null, result);
       }
     });
   },
