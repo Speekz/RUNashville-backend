@@ -55,7 +55,7 @@ module.exports = {
       }
     });
   },
-  postUserPost(req, res) {//Phil
+  postUserPost(req, res) {
     const { id, image_url, message_post, location_post } = req.body;
     const data = [ id, image_url, message_post, location_post ];
     models.post.postUserPost(data, (error)=>{
@@ -66,8 +66,7 @@ module.exports = {
       }
     });
   },
-  postUserComment(req, res) {//Phil
-    //
+  postUserComment(req, res) {
     const { id, postId, comment } = req.body;
     const data = [ id, postId, comment ];
     models.post.postUserComment(data, (error) => {
@@ -78,7 +77,7 @@ module.exports = {
       }
     });
   },
-  putReportPost(req, res){
+  putReportPost(req, res) {
     const { id } = req.params;
     models.post.putReportPost(id, (err)=>{
       if(err){
@@ -100,7 +99,7 @@ module.exports = {
     });
   },
   getUserPostLikes(req, res) {
-    const { postId } = req.body;
+    const { postId } = req.params;
     models.post.getUserPostLikes(postId, (result)=>{
         res.status(200).send(result);
     });
