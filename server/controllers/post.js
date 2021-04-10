@@ -55,4 +55,32 @@ module.exports = {
       }
     });
   },
+  postUserPost(req, res) {//Phil
+    models.post.postUserPost(req.params.id, req.body, (error)=>{
+      if(error) {
+        res.status(400).send('Error Writing Post');
+      } else {
+        res.status(200).send('Post Success')
+      }
+    });
+  },
+  postUserComment(req, res) {//Phil
+    //
+    models.post.postUserComment(req.params.id, req.params.postId, req.body.comment, (error) => {
+      if (error) {
+        res.status(400).send('Error Writing Comment');
+      } else {
+        res.status(200).send('Post Success');
+      }
+    });
+  },
+  putReportPost(req, res){
+    models.post.putReportPost(req.params.id, (err)=>{
+      if(err){
+        res.status(400).send('Error Reporting Comment');
+      } else {
+        res.status(200).send('Post Reported');
+      }
+    });
+  }
 };
