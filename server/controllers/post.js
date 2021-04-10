@@ -6,7 +6,7 @@ module.exports = {
       if (result.length !== 0) {
         res.status(200).send(result);
       } else {
-        res.status(404).send('Not Found');
+        res.status(204).send('Not Found');
       }
     });
   },
@@ -15,7 +15,7 @@ module.exports = {
       if (result.length !== 0) {
         res.status(200).send(result);
       } else {
-        res.status(404).send('Not Found');
+        res.status(204).send('Not Found');
       }
     });
   },
@@ -24,7 +24,7 @@ module.exports = {
       if (result.length !== 0) {
         res.status(200).send(result);
       } else {
-        res.status(404).send('Not Found');
+        res.status(204).send('Not Found');
       }
     });
   },
@@ -33,7 +33,7 @@ module.exports = {
       if (result.length !== 0) {
         res.status(200).send(result);
       } else {
-        res.status(404).send('Not Found');
+        res.status(204).send('Not Found');
       }
     });
   },
@@ -42,7 +42,7 @@ module.exports = {
       if (result.length !== 0) {
         res.status(200).send(result);
       } else {
-        res.status(404).send('Not Found');
+        res.status(204).send('Not Found');
       }
     });
   },
@@ -51,14 +51,16 @@ module.exports = {
       if (result.length !== 0) {
         res.status(200).send(result);
       } else {
-        res.status(404).send('Not Found');
+        res.status(204).send('Not Found');
       }
     });
   },
   postUserPost(req, res) {//Phil
-    models.post.postUserPost(req.params.id, req.body, (error)=>{
+    const { id, image_url, message_post, location_post } = req.body;
+    const data = [ id, image_url, message_post, location_post ];
+    models.post.postUserPost(data, (error)=>{
       if(error) {
-        res.status(400).send('Error Writing Post');
+        res.status(204).send('Error Writing Post');
       } else {
         res.status(200).send('Post Success')
       }
@@ -66,21 +68,41 @@ module.exports = {
   },
   postUserComment(req, res) {//Phil
     //
-    models.post.postUserComment(req.params.id, req.params.postId, req.body.comment, (error) => {
+    const { id, postId, comment } = req.body;
+    const data = [ id, postId, comment ];
+    models.post.postUserComment(data, (error) => {
       if (error) {
-        res.status(400).send('Error Writing Comment');
+        res.status(204).send('Error Writing Comment');
       } else {
         res.status(200).send('Post Success');
       }
     });
   },
   putReportPost(req, res){
-    models.post.putReportPost(req.params.id, (err)=>{
+    const { id } = req.params;
+    models.post.putReportPost(id, (err)=>{
       if(err){
-        res.status(400).send('Error Reporting Comment');
+        res.status(204).send('Error Reporting Comment');
       } else {
         res.status(200).send('Post Reported');
       }
+    });
+  },
+  postUserPostLikes(req, res) {
+    const { postId, userId, reactionId } = req.body;
+    const data = [ postId, userId, reactionId ]
+    models.post.postUserPostLikes(data, (err)=>{
+      if(err){
+        res.status(204).send('Error liking Post');
+      } else {
+        res.status(200).send('Post Reported');
+      }
+    });
+  },
+  getUserPostLikes(req, res) {
+    const { postId } = req.body;
+    models.post.getUserPostLikes(postId, (result)=>{
+        res.status(200).send(result);
     });
   }
 };
