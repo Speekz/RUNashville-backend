@@ -2,7 +2,7 @@ const db = require('../../db');
 
 module.exports = {
   getUserPost(id, callback) {
-    const queryString = 'SELECT u.id, u.name_user, u.last_name, u.image_url, p.id, p.image_url, p.message_post, p.hide_post, p.location_post, p.created_at FROM post AS p LEFT JOIN user AS u ON p.fk_user_id = u.id WHERE p.fk_user_id = ? AND p.hide_post = false';
+    const queryString = 'SELECT u.id, u.name_user, u.last_name, u.image_url AS user_image_url, p.id, p.image_url AS post_image_url, p.message_post, p.hide_post, p.location_post, p.created_at FROM post AS p LEFT JOIN user AS u ON p.fk_user_id = u.id WHERE p.fk_user_id = ? AND p.hide_post = false';
     db.connection.query(queryString, [id], (err, result) => {
       if (err) {
         console.log(err);
@@ -38,7 +38,7 @@ module.exports = {
     });
   },
   getPostComments(id, callback) {
-    const queryString = 'SELECT p.id, c.id, u.name_user, u.last_name, u.image_url, c.message_comments, c.created_at, c.updated_at FROM comments AS c LEFT JOIN post AS p ON c.fk_post_id = p.id LEFT JOIN user AS u ON c.fk_user_id = u.id WHERE c.fk_post_id = ?';
+    const queryString = 'SELECT p.id, c.id, u.id, u.name_user, u.last_name, u.image_url, c.message_comments, c.created_at, c.updated_at FROM comments AS c LEFT JOIN post AS p ON c.fk_post_id = p.id LEFT JOIN user AS u ON c.fk_user_id = u.id WHERE c.fk_post_id = ?';
     db.connection.query(queryString, [id], (err, result) => {
       if (err) {
         console.log(err);
@@ -55,9 +55,9 @@ module.exports = {
       callback(result);
     });
   },
-  postUserPost(id, post, callback) {//Phil
-    queryString = `INSERT INTO post (fk_user_id, image_url, message_post, location_post) VALUES (${id}, ${post.image_url}, ${post.message_post}, ${post.location_post})`;
-    db.connection.query(queryString, (err) => {
+  postUserPost(data, callback) {//Phil
+    const queryString = 'INSERT INTO post (fk_user_id, image_url, message_post, location_post) VALUES (?, ?, ?, ?)';
+    db.connection.query(queryString, data, (err) => {
       if(err) {
         console.log(err);
         callback(err);
@@ -66,9 +66,9 @@ module.exports = {
       }
     });
   },
-  postUserComment(id, postId, comment, callback) {//Phil
-    queryString = `INSERT INTO comments (fk_post_id, fk_user_id, message_comments) VALUES (${postId}, ${id}, ${comment})`;
-    db.connection.query(queryString, (err) => {
+  postUserComment(data, callback) {//Phil
+    const queryString = 'INSERT INTO comments (fk_post_id, fk_user_id, message_comments) VALUES (?, ?, ?)'
+    db.connection.query(queryString, data, (err) => {
       if (err) {
         console.log(err);
         callback(err);
@@ -78,14 +78,34 @@ module.exports = {
     });
   },
   putReportPost(postId, callback) {//Phil
-    queryString = `UPDATE post SET reported = true WHERE post_id = ${postId}`;
-    db.connection.query(queryString, (err) => {
+    const queryString = 'UPDATE post SET reported = true WHERE post_id = ?';
+    db.connection.query(queryString, [postId], (err) => {
       if (err) {
         console.log(err);
         callback(err);
       } else {
         callback(null);
       }
+    });
+  },
+  postUserPostLikes(data, callback) {
+    const queryString = 'INSERT INTO reactions_on_post (fk_post_id, fk_user_id, fk_reaction_id) VALUES (?, ?, ?)';
+    db.connection.query(queryString, data, (err) => {
+      if (err) {
+        console.log(err);
+        callback(err);
+      } else {
+        callback(null);
+      }
+    });
+  },
+  getUserPostLikes(pId, callback) { 
+    const queryString = 'SELECT fk_post_id, COUNT(*) FROM reactions_on_post WHERE fk_reaction_id = 1 && fk_post_id = ? GROUP BY fk_post_id';
+    db.connection.query(queryString, [pId], (err) => {
+      if (err) {
+        console.log(err);
+      }
+      callback(result);
     });
   }
 };
