@@ -1,6 +1,15 @@
 const models = require('../models');
 
 module.exports = {
+  getAllPosts(req, res) {
+    models.post.getAllPosts((result) => {
+      if (result.length !== 0) {
+        res.status(200).send(result);
+      } else {
+        res.status(404).send('Not Found');
+      }
+    });
+  },
   getUserPost(req, res) {
     models.post.getUserPost(req.query.id, (result) => {
       if (result.length !== 0) {
