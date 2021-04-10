@@ -55,4 +55,37 @@ module.exports = {
       callback(result);
     });
   },
+  postUserPost(id, post, callback) {//Phil
+    queryString = `INSERT INTO post (fk_user_id, image_url, message_post, location_post) VALUES (${id}, ${post.image_url}, ${post.message_post}, ${post.location_post})`;
+    db.connection.query(queryString, (err) => {
+      if(err) {
+        console.log(err);
+        callback(err);
+      } else {
+        callback(null);
+      }
+    });
+  },
+  postUserComment(id, postId, comment, callback) {//Phil
+    queryString = `INSERT INTO comments (fk_post_id, fk_user_id, message_comments) VALUES (${postId}, ${id}, ${comment})`;
+    db.connection.query(queryString, (err) => {
+      if (err) {
+        console.log(err);
+        callback(err);
+      } else {
+        callback(null);
+      }
+    });
+  },
+  putReportPost(postId, callback) {//Phil
+    queryString = `UPDATE post SET reported = true WHERE post_id = ${postId}`;
+    db.connection.query(queryString, (err) => {
+      if (err) {
+        console.log(err);
+        callback(err);
+      } else {
+        callback(null);
+      }
+    });
+  }
 };
