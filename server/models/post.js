@@ -1,6 +1,15 @@
 const db = require('../../db');
 
 module.exports = {
+  getAllPosts(callback) {
+    const queryString = 'SELECT u.id, u.name_user, u.last_name, u.image_url, p.id, p.image_url, p.message_post, p.hide_post, p.location_post, p.created_at FROM post AS p LEFT JOIN user AS u ON p.fk_user_id = u.id WHERE p.hide_post = false ORDER BY p.created_at DESC';
+    db.connection.query(queryString, (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      callback(result);
+    });
+  },
   getUserPost(id, callback) {
     const queryString = 'SELECT u.id, u.name_user, u.last_name, u.image_url AS user_image_url, p.id, p.image_url AS post_image_url, p.message_post, p.hide_post, p.location_post, p.created_at FROM post AS p LEFT JOIN user AS u ON p.fk_user_id = u.id WHERE p.fk_user_id = ? AND p.hide_post = false';
     db.connection.query(queryString, [id], (err, result) => {
