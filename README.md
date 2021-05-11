@@ -19,14 +19,14 @@ Use /api/[endpoint]
 
 ### Services 
 | Endpoint | Method | Description |
-| ------ | ------ |
+| ------ | ------ | ------ |
 | /login | POST | Send login credentials to authenticate |
 | /signup | POST | Send signup information to the platform |
 
 ### User
 
 | Endpoint | Method | Description |
-| ------ | ------ |
+| ------ | ------- | ------ |
 | /user/:id/type | GET | Get the user Type by id |
 | /user/:id | GET | Get the user details by id |
 | /friends/:uid | GET | Get the friends of the user by id |
@@ -49,7 +49,7 @@ Where the update property of the object is the field in the database you want to
 | banned | Update banned status |
 | name | Update name |
 | last_name | Update last name |
-| addre
+| address | Update the address of the user |
 | profile_picture | Update Profile Picture |
 | profile_banner | Update Profile Banner |
 
@@ -67,7 +67,7 @@ Example:
 ### Post
 
 | Endpoint | Method | Description |
-| ------ | ------ |
+| ------ | ------ | ------ |
 | /post/all | GET | Get all the post in the platform |
 | /post | GET | Get all the post of a certain user using id as a query parameter, example url.com?id=THE-ID |
 | /post/:id/reported | GET | Get all the post of the user that are reported |
@@ -82,7 +82,7 @@ Example:
 
 ### Events
 | Endpoint | Method | Description |
-| ------ | ------ |
+| ------ | ------ | ------ |
 | /events | GET| Get all the events |
 | /events/promoted | GET | Get all the promoted events |
 | /events/hidden | GET | Get all the events where show_event is false |
@@ -92,7 +92,7 @@ Example:
 
 ### Admin
 | Endpoint | Method | Description |
-| ------ | ------ |
+| ------ | ------ | ------ |
 | /users/ban | PUT | Update the ban status of many users by passing an object to the body |
 
 {
