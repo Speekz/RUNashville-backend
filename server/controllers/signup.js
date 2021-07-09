@@ -9,6 +9,7 @@ module.exports = {
     } = req.body;
     const hashedPW = SHA256(password + name + lastname + address + email
       + created_at).toString();
+    console.log(created_at);
     models.signup.newUser([hashedPW, name, lastname, address, email, 1, false, created_at], () => {
       res.status(201).send('Created');
     });
